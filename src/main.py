@@ -4,8 +4,11 @@ from fastapi import BackgroundTasks
 from fastapi import FastAPI
 from time import sleep
 
+from logger import logger
 
+logger.info("Creating app...")
 app = FastAPI()
+logger.info("App created!")
 
 
 def sleep_and_log(wait: int):
@@ -15,10 +18,10 @@ def sleep_and_log(wait: int):
 
 
 @app.post("/wait/{wait}/")
-async def send_notification(wait: int, background_tasks: BackgroundTasks):
-    print(f"Let's add a Task[{wait}]")
+async def wait(wait: int, background_tasks: BackgroundTasks):
+    logger.info(f"Let's add Task[{wait}]")
     background_tasks.add_task(sleep_and_log, wait)
-    print(f"Task[{wait}] added")
+    logger.info(f"Task[{wait}] added")
     return {"message": f"Task[{wait}]"}
 
 
