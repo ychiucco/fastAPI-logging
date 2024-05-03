@@ -1,26 +1,13 @@
 [tool.poetry]
-name = "fractal-server"
-version = "2.0.3"
-description = "Server component of the Fractal analytics platform"
+name = "fastapi-logging"
+packages = [{include = "*", from="src"}]
+version = "0.0.1"
+description = "Explor logging in FastAPI"
 authors = [
-    "Tommaso Comparin <tommaso.comparin@exact-lab.it>",
-    "Marco Franzon <marco.franzon@exact-lab.it>",
     "Yuri Chiucconi <yuri.chiucconi@exact-lab.it>",
-    "Jacopo Nespolo <jacopo.nespolo@exact-lab.it>",
 ]
 readme = "README.md"
-homepage = "https://github.com/fractal-analytics-platform/fractal-server"
-repository = "https://github.com/fractal-analytics-platform/fractal-server"
-documentation = "https://fractal-analytics-platform.github.io/fractal-server"
-license = "BSD-3-Clause"
-exclude = [
-"fractal_server/.gitignore",
-"fractal_server/data_migrations/old",
-"fractal_server/json_schemas",
-]
-
-[tool.poetry.urls]
-"Changelog" = "https://github.com/fractal-analytics-platform/fractal-server/blob/main/CHANGELOG.md"
+repository = "https://github.com/ychiucco/fastAPI-logging"
 
 
 [tool.poetry.dependencies]
@@ -86,30 +73,9 @@ filterwarnings = [
     "error::pytest.PytestUnraisableExceptionWarning",
 ]
 
-[tool.bumpver]
-current_version = "2.0.3"
-version_pattern = "MAJOR.MINOR.PATCH[PYTAGNUM]"
-commit_message = "bump version {old_version} -> {new_version}"
-commit = true
-tag = true
-push = true
+# [tool.poetry.scripts]
+# main = "fractal_server.__main__:run"
 
-[tool.bumpver.file_patterns]
-"pyproject.toml" = [
-    'version = "{version}"$',
-]
-"fractal_server/__init__.py" = [
-    '__VERSION__ = "{version}"$'
-]
-
-[tool.poetry.scripts]
-fractalctl = "fractal_server.__main__:run"
-
-[tool.coverage.run]
-branch = true
-parallel = true
-relative_files = true
-omit = ["tests/*", "benchmarks/*", "fractal_server/json_schemas/*"]
 
 [[tool.mypy.overrides]]
 module = ["devtools", "uvicorn", "pytest", "asgi_lifespan", "asyncpg"]
