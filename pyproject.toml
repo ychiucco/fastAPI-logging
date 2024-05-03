@@ -73,9 +73,6 @@ filterwarnings = [
     "error::pytest.PytestUnraisableExceptionWarning",
 ]
 
-# [tool.poetry.scripts]
-# main = "fractal_server.__main__:run"
-
 
 [[tool.mypy.overrides]]
 module = ["devtools", "uvicorn", "pytest", "asgi_lifespan", "asyncpg"]
