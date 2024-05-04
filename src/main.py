@@ -1,27 +1,45 @@
 import uvicorn
+import logging
+import json
 
 from fastapi import BackgroundTasks
 from fastapi import FastAPI
+from pathlib import Path
 from time import sleep
+from logging import getLogger
 
-from logger import logger
 
-logger.info("Creating app...")
+def setup_logging(path: Path):
+    with open(path) as f:
+        config = json.load(f)
+    logging.config.dictConfig(config)
+
+
 app = FastAPI()
-logger.info("App created!")
 
+logger = getLogger(__name__)
+config_file = Path("src/loggerConfig.json")
+setup_logging(config_file)
 
-def sleep_and_log(wait: int):
-    print(f"Wait {wait} seconds...\t", end="")
+async def sleep_and_log(wait: int):
+    logger.info(f"Wait {wait} seconds...\t")
     sleep(wait)
-    print("done!")
+    logger.info("done!")
 
 
 @app.post("/wait/{wait}/")
 async def wait(wait: int, background_tasks: BackgroundTasks):
-    logger.info(f"Let's add Task[{wait}]")
+    
+    logger.debug(f"Debug from Task[{wait}]")
+    logger.info(f"Info from Task[{wait}]")
+    logger.warning(f"Warning from Task[{wait}]")
+    logger.error(f"Error from Task[{wait}]")
+    logger.critical(f"Critical from Task[{wait}]")
+
     background_tasks.add_task(sleep_and_log, wait)
+
     logger.info(f"Task[{wait}] added")
+
     return {"message": f"Task[{wait}]"}
 
 

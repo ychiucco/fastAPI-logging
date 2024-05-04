@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "base": {
+            "format": "%(asctime)s\t%(levelname)s\t- %(filename)s::%(funcName)s::%(lineno)d\t%(message)s"
+        }
+    },
+    "handlers":{
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "formatter": "base",
+            "stream": "ext://sys.stdout"
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "formatter": "base",
+            "filename": "app.log"
+        }
+    },
+    "loggers":{
+        "root": {
+            "level": "DEBUG",
+            "handlers": ["stdout", "file"]
+        }
+    }
+}
