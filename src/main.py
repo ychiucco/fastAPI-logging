@@ -1,9 +1,9 @@
 import uvicorn
 from fastapi import FastAPI
 
+from api import router
 from logger import get_logger
 from logger import config
-from api import router
 
 
 logger = get_logger(__name__)
