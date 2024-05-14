@@ -50,4 +50,4 @@ Modern Python loggin tips (from [mCoding](https://www.youtube.com/watch?v=9L77QE
 - Use [dictConfig](https://docs.python.org/3/library/logging.config.html#logging.config.dictConfig);
 - Put all Handlers/Filters on the root logger;
 - Don't use the root logger;
-- One logger per majob subcomponent;
+- One logger per major subcomponent;
