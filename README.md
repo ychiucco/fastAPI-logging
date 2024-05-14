@@ -42,3 +42,12 @@ $ poetry run python src/main.py
 2024-05-14 15:36:30,337	INFO			main.py::sleep_and_log::26
 		done!
 ```
+
+
+---
+
+Modern Python loggin tips (from [mCoding](https://www.youtube.com/watch?v=9L77QExPmI0)):
+- Use [dictConfig](https://docs.python.org/3/library/logging.config.html#logging.config.dictConfig);
+- Put all Handlers/Filters on the root logger;
+- Don't use the root logger;
+- One logger per majob subcomponent;
