@@ -9,17 +9,16 @@ from time import sleep
 from logging import getLogger
 
 
-def setup_logging(path: Path):
+def log_config(path: Path):
     with open(path) as f:
         config = json.load(f)
-    logging.config.dictConfig(config)
-
+    return config
 
 app = FastAPI()
 
 logger = getLogger(__name__)
-config_file = Path("src/loggerConfig.json")
-setup_logging(config_file)
+config = log_config(Path("src/loggerConfig.json"))
+logging.config.dictConfig(config)
 
 async def sleep_and_log(wait: int):
     logger.info(f"Wait {wait} seconds...\t")
@@ -49,4 +48,5 @@ if __name__ == "__main__":
         app,
         host="127.0.0.1",
         port=8000,
+        log_config=config
     )
